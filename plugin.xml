@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Vala Editor"
+            extensions="vala"
+            icon="icons/sample.gif"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="org.tglman.valipse.editors.ValaEditor"
+            id="org.tglman.valipse.editors.ValaEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.core.resources.builders" id="ValaProjectBuilder" name="Vala Builder">
+         <builder
+               hasNature="true">
+            <run
+                  class="org.tglman.valipse.builders.ValaProjectBuilder">
+            </run>
+         </builder>
+         
+   </extension>
+   <extension
+         id="valaNature"
+         name="ValaNature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.tglman.valipse.builders.ValaNature">
+         </run>
+      </runtime>
+      <builder
+            id="Valipse.ValaProjectBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="Valipse.contribution1"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="org.tglman.valipse.builders.ToggleNatureAction"
+               enablesFor="+"
+               id="Valipse.addRemoveNatureAction"
+               label="Add/Remove Vala Nature"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+   
+</plugin>
